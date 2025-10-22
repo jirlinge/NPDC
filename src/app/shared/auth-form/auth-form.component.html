@@ -1,58 +1,53 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container" role="form">
   <div class="form-field">
-    <label for="email" class="form-label">
-      Email
+    <label for="username" class="form-label">
+      <!--Username-->
     </label>
-    <input
-      id="email"
-      type="email"
-      formControlName="email"
-      class="form-input focus-ring"
-      [attr.aria-invalid]="email?.invalid && email?.touched"
-      [attr.aria-describedby]="email?.invalid && email?.touched ? 'email-error' : null"
-    />
-    <div
-      *ngIf="email?.invalid && email?.touched"
-      id="email-error"
-      class="form-error"
-      role="alert"
-      aria-live="polite"
-    >
-      <span *ngIf="email?.errors?.['required']">Email is required</span>
-      <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+    <input id="username"
+           type="text"
+           formControlName="username"
+           placeholder="Username"
+           class="form-input focus-ring"
+           [attr.aria-invalid]="username?.invalid && username?.touched"
+           [attr.aria-describedby]="username?.invalid && username?.touched ? 'username-error' : null" />
+    <div *ngIf="username?.invalid && username?.touched"
+         id="username-error"
+         class="form-error"
+         role="alert"
+         aria-live="polite">
+      <!--<span *ngIf="username?.errors?.['email']">Please enter a valid username</span>-->
     </div>
   </div>
 
   <div class="form-field">
     <label for="password" class="form-label">
-      Password
+      <!--Password-->
     </label>
-    <input
-      id="password"
-      type="password"
-      formControlName="password"
-      class="form-input focus-ring"
-      [attr.aria-invalid]="password?.invalid && password?.touched"
-      [attr.aria-describedby]="password?.invalid && password?.touched ? 'password-error' : null"
-    />
-    <div
-      *ngIf="password?.invalid && password?.touched"
-      id="password-error"
-      class="form-error"
-      role="alert"
-      aria-live="polite"
-    >
-      <span *ngIf="password?.errors?.['required']">Password is required</span>
-      <span *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters</span>
+    <input id="password"
+           type="password"
+           formControlName="password"
+           placeholder="Password"
+           class="form-input focus-ring"
+           [attr.aria-invalid]="password?.invalid && password?.touched"
+           [attr.aria-describedby]="password?.invalid && password?.touched ? 'password-error' : null" />
+    <div *ngIf="password?.invalid && password?.touched"
+         id="password-error"
+         class="form-error"
+         role="alert"
+         aria-live="polite">
+      <span *ngIf="password?.errors?.['required']">Le mot de passe est requis</span>
+      <span *ngIf="password?.errors?.['minlength']">Le mot de passe doit contenir au moins 6 caractères</span>
     </div>
   </div>
 
-  <button
-    type="submit"
-    [disabled]="form.invalid || isSubmitting"
-    class="submit-button"
-    [attr.aria-busy]="isSubmitting"
-  >
+  <div *ngIf="errorMessage" class="form-error-message" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <button type="submit"
+          [disabled]="form.invalid || isSubmitting"
+          class="submit-button"
+          [attr.aria-busy]="isSubmitting">
     <span *ngIf="!isSubmitting">Sign in</span>
     <span *ngIf="isSubmitting" class="loading-state">
       <span class="btn-spinner"></span>

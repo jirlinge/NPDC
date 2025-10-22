@@ -1,29 +1,18 @@
 <section class="home-container">
   <div class="hero-media">
-    <video
-      autoplay
-      muted
-      loop
-      playsinline
-      poster="assets/media/hero-fallback.jpg"
-      class="hero-video"
-    >
-      <source src="assets/media/hero.mp4" type="video/mp4" />
+    <video autoplay
+           muted
+           loop
+           playsinline
+           src="media/hero.mp4"
+           poster="media/hero-fallback.jpg"
+           class="hero-video">
     </video>
     <div class="hero-overlay"></div>
   </div>
 
   <div class="content-wrapper">
     <div class="auth-card">
-      <div class="header-section">
-        <div class="wordmark">
-          NPDC
-        </div>
-        <h1 class="title">
-          Outsource your focus.
-        </h1>
-      </div>
-
       <app-auth-form></app-auth-form>
     </div>
   </div>

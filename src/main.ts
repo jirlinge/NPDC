@@ -9,7 +9,7 @@ import { routes } from './app/app.routes';
   imports: [RouterOutlet],
   template: '<router-outlet />'
 })
-export class App {}
+export class App { }
 
 bootstrapApplication(App, {
   providers: [provideRouter(routes)]

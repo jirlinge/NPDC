@@ -1,0 +1,130 @@
+/* Styles pour le formulaire EVG moderne */
+
+/* Slider personnalisé */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  background: #e5e7eb;
+  outline: none;
+  border-radius: 8px;
+  height: 8px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #00FF41;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #00FF41;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus ring personnalisé */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #00FF41;
+  outline-offset: 2px;
+}
+
+/* Animation pour les transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Styles pour les états de validation */
+.border-red-500 {
+  border-color: #ef4444 !important;
+}
+
+/* Animation du spinner */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .max-w-lg {
+    max-width: 100%;
+    margin: 0 1rem;
+  }
+  
+  .p-6 {
+    padding: 1.5rem;
+  }
+  
+  .space-y-6 > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  .space-y-4 > * + * {
+    margin-top: 1rem;
+  }
+}
+
+/* Amélioration de l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  .transition-all,
+  .animate-spin {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Styles pour les messages d'erreur */
+[aria-live="polite"] {
+  min-height: 1.25rem;
+}
+
+/* Amélioration du contraste pour l'accessibilité */
+.text-gray-700 {
+  color: #374151;
+}
+
+.text-gray-600 {
+  color: #4b5563;
+}
+
+/* Focus visible pour les boutons */
+button:focus-visible {
+  outline: 2px solid #00FF41;
+  outline-offset: 2px;
+}
+
+/* Hover states */
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Disabled state */
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
