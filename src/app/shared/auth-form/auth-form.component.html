@@ -1,0 +1,62 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container" role="form">
+  <div class="form-field">
+    <label for="email" class="form-label">
+      Email
+    </label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      class="form-input focus-ring"
+      [attr.aria-invalid]="email?.invalid && email?.touched"
+      [attr.aria-describedby]="email?.invalid && email?.touched ? 'email-error' : null"
+    />
+    <div
+      *ngIf="email?.invalid && email?.touched"
+      id="email-error"
+      class="form-error"
+      role="alert"
+      aria-live="polite"
+    >
+      <span *ngIf="email?.errors?.['required']">Email is required</span>
+      <span *ngIf="email?.errors?.['email']">Please enter a valid email</span>
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="password" class="form-label">
+      Password
+    </label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      class="form-input focus-ring"
+      [attr.aria-invalid]="password?.invalid && password?.touched"
+      [attr.aria-describedby]="password?.invalid && password?.touched ? 'password-error' : null"
+    />
+    <div
+      *ngIf="password?.invalid && password?.touched"
+      id="password-error"
+      class="form-error"
+      role="alert"
+      aria-live="polite"
+    >
+      <span *ngIf="password?.errors?.['required']">Password is required</span>
+      <span *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters</span>
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="form.invalid || isSubmitting"
+    class="submit-button"
+    [attr.aria-busy]="isSubmitting"
+  >
+    <span *ngIf="!isSubmitting">Sign in</span>
+    <span *ngIf="isSubmitting" class="loading-state">
+      <span class="btn-spinner"></span>
+      <span>Signing in...</span>
+    </span>
+  </button>
+</form>

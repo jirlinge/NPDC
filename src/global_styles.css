@@ -1,0 +1,31 @@
+:root {
+  --accent: #00FF41;
+  --bg-white: #FFFFFF;
+  --text-black: #0B0B0B;
+  --border-gray: #EDEDED;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--bg-white);
+  color: var(--text-black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
