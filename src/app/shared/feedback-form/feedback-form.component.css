@@ -3,6 +3,8 @@
   background: transparent;
   padding: 0;
   display: block;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-card {
@@ -13,6 +15,7 @@
   box-shadow: none;
   padding: 48px;
   animation: none;
+  box-sizing: border-box;
 }
 
 .form-header {
@@ -23,12 +26,16 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-label {
@@ -56,6 +63,8 @@
   transition: all 0.15s ease;
   border-radius: 0;
   box-shadow: none;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 .form-control::placeholder {
@@ -92,6 +101,8 @@
   display: flex;
   align-items: center;
   gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .slider {
