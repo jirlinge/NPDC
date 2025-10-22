@@ -15,6 +15,7 @@ export class AuthFormComponent {
   form: FormGroup;
   isSubmitting = false;
   errorMessage = '';
+  showPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +34,10 @@ export class AuthFormComponent {
 
   get password() {
     return this.form.get('password');
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
   onSubmit(): void {
