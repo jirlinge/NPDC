@@ -1,72 +1,57 @@
-<div class="auth-card">
-  <div class="auth-header">
-    <h1 class="auth-title">Connexion</h1>
-    <p class="auth-subtitle">Accédez à votre espace personnel</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container" role="form">
+  <div class="form-field">
+    <label for="username" class="form-label">
+      <!--Username-->
+    </label>
+    <input id="username"
+           type="text"
+           formControlName="username"
+           placeholder="Username"
+           class="form-input focus-ring"
+           [attr.aria-invalid]="username?.invalid && username?.touched"
+           [attr.aria-describedby]="username?.invalid && username?.touched ? 'username-error' : null" />
+    <div *ngIf="username?.invalid && username?.touched"
+         id="username-error"
+         class="form-error"
+         role="alert"
+         aria-live="polite">
+      <!--<span *ngIf="username?.errors?.['email']">Please enter a valid username</span>-->
+    </div>
   </div>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container" role="form">
-    <div class="form-field">
-      <label for="username" class="form-label">Nom d'utilisateur</label>
-      <input id="username"
-             type="text"
-             formControlName="username"
-             placeholder="Entrez votre nom d'utilisateur"
-             class="form-input"
-             [class.error]="username?.invalid && username?.touched"
-             [attr.aria-invalid]="username?.invalid && username?.touched"
-             [attr.aria-describedby]="username?.invalid && username?.touched ? 'username-error' : null" />
-      <div *ngIf="username?.invalid && username?.touched"
-           id="username-error"
-           class="form-error"
-           role="alert"
-           aria-live="polite">
-        <span *ngIf="username?.errors?.['required']">Le nom d'utilisateur est requis</span>
-      </div>
+  <div class="form-field">
+    <label for="password" class="form-label">
+      <!--Password-->
+    </label>
+    <input id="password"
+           type="password"
+           formControlName="password"
+           placeholder="Password"
+           class="form-input focus-ring"
+           [attr.aria-invalid]="password?.invalid && password?.touched"
+           [attr.aria-describedby]="password?.invalid && password?.touched ? 'password-error' : null" />
+    <div *ngIf="password?.invalid && password?.touched"
+         id="password-error"
+         class="form-error"
+         role="alert"
+         aria-live="polite">
+      <span *ngIf="password?.errors?.['required']">Le mot de passe est requis</span>
+      <span *ngIf="password?.errors?.['minlength']">Le mot de passe doit contenir au moins 6 caractères</span>
     </div>
+  </div>
 
-    <div class="form-field">
-      <label for="password" class="form-label">Mot de passe</label>
-      <div class="password-field">
-        <input id="password"
-               [type]="showPassword ? 'text' : 'password'"
-               formControlName="password"
-               placeholder="Entrez votre mot de passe"
-               class="form-input"
-               [class.error]="password?.invalid && password?.touched"
-               [attr.aria-invalid]="password?.invalid && password?.touched"
-               [attr.aria-describedby]="password?.invalid && password?.touched ? 'password-error' : null" />
-        <button type="button"
-                class="toggle-password"
-                (click)="togglePasswordVisibility()"
-                [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'">
-          <span *ngIf="!showPassword">👁️</span>
-          <span *ngIf="showPassword">🙈</span>
-        </button>
-      </div>
-      <div *ngIf="password?.invalid && password?.touched"
-           id="password-error"
-           class="form-error"
-           role="alert"
-           aria-live="polite">
-        <span *ngIf="password?.errors?.['required']">Le mot de passe est requis</span>
-        <span *ngIf="password?.errors?.['minlength']">Le mot de passe doit contenir au moins 6 caractères</span>
-      </div>
-    </div>
+  <div *ngIf="errorMessage" class="form-error-message" role="alert">
+    {{ errorMessage }}
+  </div>
 
-    <div *ngIf="errorMessage" class="form-error-message" role="alert">
-      <span class="error-icon">⚠️</span>
-      {{ errorMessage }}
-    </div>
-
-    <button type="submit"
-            [disabled]="form.invalid || isSubmitting"
-            class="submit-button"
-            [attr.aria-busy]="isSubmitting">
-      <span *ngIf="!isSubmitting">Se connecter</span>
-      <span *ngIf="isSubmitting" class="loading-state">
-        <span class="btn-spinner"></span>
-        <span>Connexion...</span>
-      </span>
-    </button>
-  </form>
-</div>
+  <button type="submit"
+          [disabled]="form.invalid || isSubmitting"
+          class="submit-button"
+          [attr.aria-busy]="isSubmitting">
+    <span *ngIf="!isSubmitting">Sign in</span>
+    <span *ngIf="isSubmitting" class="loading-state">
+      <span class="btn-spinner"></span>
+      <span>Signing in...</span>
+    </span>
+  </button>
+</form>
