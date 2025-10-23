@@ -8,26 +8,8 @@
 
     <!-- Formulaire -->
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="feedback-form">
-        
-      <!-- 1. Prénom -->
-      <div class="form-group">
-        <label for="firstName" class="form-label">
-          Prénom <span class="required">*</span>
-        </label>
-        <input
-          id="firstName"
-          type="text"
-          formControlName="firstName"
-          placeholder="Votre prénom"
-          class="form-control"
-          [class.error]="f['firstName'].invalid && f['firstName'].touched"
-        />
-        <div *ngIf="f['firstName'].invalid && f['firstName'].touched" class="error-message" aria-live="polite">
-          Le prénom est requis
-        </div>
-      </div>
 
-      <!-- 2. Budget par personne -->
+      <!-- 1. Budget par personne -->
       <div class="form-group">
         <label for="budget" class="form-label">
           Budget par personne (€) <span class="required">*</span>
@@ -49,21 +31,47 @@
         <p class="form-hint">Hors transport, pour 2-3 nuits</p>
       </div>
 
-      <!-- 3. Période souhaitée -->
+      <!-- 2. Périodes souhaitées -->
       <div class="form-group">
-        <label for="period" class="form-label">
-          Période souhaitée <span class="required">*</span>
+        <label class="form-label">
+          Périodes souhaitées <span class="required">*</span>
         </label>
-        <input
-          id="period"
-          type="month"
-          formControlName="period"
-          class="form-control"
-          [class.error]="f['period'].invalid && f['period'].touched"
-        />
+        <p class="form-hint">Sélectionnez un ou plusieurs week-ends</p>
+        <div class="periods-grid">
+          <label
+            *ngFor="let weekend of availableWeekends"
+            class="period-checkbox-label"
+            [class.selected]="isPeriodSelected(weekend.value)"
+          >
+            <input
+              type="checkbox"
+              [value]="weekend.value"
+              (change)="togglePeriod(weekend.value)"
+              [checked]="isPeriodSelected(weekend.value)"
+              class="period-checkbox"
+            />
+            <span class="period-text">{{ weekend.label }}</span>
+          </label>
+          <label
+            class="period-checkbox-label"
+            [class.selected]="isPeriodSelected('autre')"
+          >
+            <input
+              type="checkbox"
+              value="autre"
+              (change)="togglePeriod('autre')"
+              [checked]="isPeriodSelected('autre')"
+              class="period-checkbox"
+            />
+            <span class="period-text">Autre période</span>
+          </label>
+        </div>
+        <div *ngIf="f['periods'].invalid && f['periods'].touched" class="error-message" aria-live="polite">
+          Veuillez sélectionner au moins une période
+        </div>
       </div>
 
-      <!-- 4. Durée du séjour -->
+      <!-- 3. Durée du séjour -->
       <div class="form-group">
         <label for="duration" class="form-label">
           Durée du séjour <span class="required">*</span>
@@ -81,7 +89,7 @@
         </select>
       </div>
 
-      <!-- 5. Destination -->
+      <!-- 4. Destination -->
       <div class="form-group">
         <label for="destination" class="form-label">
           Destination <span class="required">*</span>
@@ -96,7 +104,45 @@
         />
       </div>
 
-      <!-- 6. Activités préférées -->
+      <!-- 5. Proximité Paris -->
+      <div class="form-group">
+        <label for="proximity" class="form-label">
+          Proximité de Paris <span class="required">*</span>
+        </label>
+        <select
+          id="proximity"
+          formControlName="proximity"
+          class="form-control"
+          [class.error]="f['proximity'].invalid && f['proximity'].touched"
+        >
+          <option value="">Sélectionnez une option</option>
+          <option value="proche-paris">Proche de Paris</option>
+          <option value="peu-importe">Peu importe</option>
+        </select>
+      </div>
+
+      <!-- 6. Style de séjour -->
+      <div class="form-group">
+        <label for="style" class="form-label">
+          Style de séjour <span class="required">*</span>
+        </label>
+        <select
+          id="style"
+          formControlName="style"
+          class="form-control"
+          [class.error]="f['style'].invalid && f['style'].touched"
+        >
+          <option value="">Sélectionnez un style</option>
+          <option value="nightlife-city">Nightlife / City-trip</option>
+          <option value="aventure-nature">Aventure / Nature</option>
+          <option value="detente-villa">Détente / Villa</option>
+          <option value="gastro-chill">Gastro / Chill</option>
+          <option value="insolite-thematique">Insolite / Thématique</option>
+          <option value="zen-detente">Zen / Détente</option>
+        </select>
+      </div>
+
+      <!-- 7. Activités préférées -->
       <div class="form-group">
         <label for="preferredActivities" class="form-label">
           Activités préférées
@@ -110,7 +156,7 @@
         ></textarea>
       </div>
 
-      <!-- 7. Activités à éviter -->
+      <!-- 8. Activités à éviter -->
       <div class="form-group">
         <label for="activitiesToAvoid" class="form-label">
           Activités à éviter
@@ -122,25 +168,6 @@
           rows="3"
           class="form-control textarea"
         ></textarea>
-      </div>
-
-      <!-- 8. Style de séjour -->
-      <div class="form-group">
-        <label for="style" class="form-label">
-          Style de séjour <span class="required">*</span>
-        </label>
-        <select
-          id="style"
-          formControlName="style"
-          class="form-control"
-          [class.error]="f['style'].invalid && f['style'].touched"
-        >
-          <option value="">Sélectionnez un style</option>
-          <option value="detente">Détente</option>
-          <option value="fete">Fête</option>
-          <option value="aventure">Aventure</option>
-          <option value="surprise">Surprise</option>
-        </select>
       </div>
 
       <!-- 9. Consentement -->

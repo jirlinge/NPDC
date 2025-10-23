@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 
 export interface FeedbackFormData {
-  firstName: string;
   budget: number;
-  period: string;
+  periods: string[];
   duration: string;
   destination: string;
+  proximity: string;
   preferredActivities: string;
   activitiesToAvoid: string;
   style: string;
@@ -31,13 +31,16 @@ export class FeedbackFormComponent implements OnInit {
   errorMessage = '';
   successMessage = '';
 
+  availableWeekends: { value: string; label: string }[] = [];
+
   constructor(private fb: FormBuilder) {
+    this.generateWeekends();
     this.form = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
       budget: [200, [Validators.required, Validators.min(50), Validators.max(500)]],
-      period: ['', [Validators.required]],
+      periods: [[], [Validators.required]],
       duration: ['', [Validators.required]],
       destination: ['', [Validators.required]],
+      proximity: ['', [Validators.required]],
       preferredActivities: [''],
       activitiesToAvoid: [''],
       style: ['', [Validators.required]],
@@ -46,13 +49,55 @@ export class FeedbackFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Charger les données sauvegardées depuis localStorage
     this.loadFromLocalStorage();
-    
-    // Sauvegarder automatiquement à chaque changement
     this.form.valueChanges.subscribe(() => {
       this.saveToLocalStorage();
     });
+  }
+
+  private generateWeekends(): void {
+    const year = 2026;
+    const months = [4, 5];
+    this.availableWeekends = [];
+
+    months.forEach(month => {
+      const daysInMonth = new Date(year, month, 0).getDate();
+      for (let day = 1; day <= daysInMonth; day++) {
+        const date = new Date(year, month - 1, day);
+        if (date.getDay() === 6) {
+          const weekendStart = new Date(date);
+          const weekendEnd = new Date(date);
+          weekendEnd.setDate(weekendEnd.getDate() + 1);
+
+          const startStr = weekendStart.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long' });
+          const endStr = weekendEnd.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long' });
+          const value = `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+
+          this.availableWeekends.push({
+            value: value,
+            label: `${startStr} - ${endStr} 2026`
+          });
+        }
+      }
+    });
+  }
+
+  togglePeriod(period: string): void {
+    const periods = this.form.get('periods')?.value || [];
+    const index = periods.indexOf(period);
+
+    if (index > -1) {
+      periods.splice(index, 1);
+    } else {
+      periods.push(period);
+    }
+
+    this.form.patchValue({ periods });
+  }
+
+  isPeriodSelected(period: string): boolean {
+    const periods = this.form.get('periods')?.value || [];
+    return periods.includes(period);
   }
 
   get f() {
@@ -77,14 +122,14 @@ export class FeedbackFormComponent implements OnInit {
       const feedback = {
         id: Date.now(),
         userId: this.userId,
-        username: this.username || formData.firstName,
+        username: this.username,
         date: new Date(),
         evgDetails: {
-          firstName: formData.firstName,
           budget: formData.budget,
-          period: formData.period,
+          periods: formData.periods,
           duration: formData.duration,
           destination: formData.destination,
+          proximity: formData.proximity,
           preferredActivities: formData.preferredActivities,
           activitiesToAvoid: formData.activitiesToAvoid,
           style: formData.style,
@@ -114,14 +159,16 @@ export class FeedbackFormComponent implements OnInit {
   }
 
   private createAndDownloadTxt(feedback: any): void {
+    const periodsText = feedback.evgDetails.periods.join('\n');
     const content = `PRÉFÉRENCES EVG - ${feedback.username}
 Date: ${new Date().toLocaleString('fr-FR')}
 
-Prénom: ${feedback.evgDetails.firstName}
+Username: ${feedback.username}
 Budget par personne: ${feedback.evgDetails.budget}€
-Période souhaitée: ${feedback.evgDetails.period}
+Périodes souhaitées:\n${periodsText}
 Durée du séjour: ${feedback.evgDetails.duration} nuit(s)
 Destination: ${feedback.evgDetails.destination}
+Proximité: ${feedback.evgDetails.proximity}
 Style de séjour: ${feedback.evgDetails.style}
 
 Activités préférées:

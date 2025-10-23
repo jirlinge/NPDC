@@ -109,10 +109,10 @@
         <div class="feedback-header">
           <div class="feedback-user">
             <div class="user-avatar">
-              <span>{{ feedback.evgDetails.firstName?.charAt(0) || '?' }}</span>
+              <span>{{ feedback.username?.charAt(0) || '?' }}</span>
             </div>
             <div class="user-info">
-              <h3>{{ feedback.evgDetails.firstName || 'Anonyme' }}</h3>
+              <h3>{{ feedback.username || 'Anonyme' }}</h3>
               <p>{{ formatDate(feedback.date) }}</p>
             </div>
           </div>
@@ -159,7 +159,7 @@
   >
     <div class="modal-content" (click)="$event.stopPropagation()">
       <div class="modal-header">
-        <h2>{{ selectedFeedback.evgDetails.firstName || 'Anonyme' }}</h2>
+        <h2>{{ selectedFeedback.username || 'Anonyme' }}</h2>
         <button (click)="closeDetails()" class="btn-close" aria-label="Fermer">
           <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -177,8 +177,12 @@
                 <span class="info-value">{{ selectedFeedback.evgDetails.budget }}€</span>
               </div>
               <div class="info-item">
-                <span class="info-label">Période:</span>
-                <span class="info-value">{{ selectedFeedback.evgDetails.period }}</span>
+                <span class="info-label">Périodes:</span>
+                <span class="info-value">{{ selectedFeedback.evgDetails.periods.join(', ') }}</span>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Proximité:</span>
+                <span class="info-value">{{ selectedFeedback.evgDetails.proximity }}</span>
               </div>
               <div class="info-item">
                 <span class="info-label">Durée:</span>

@@ -79,15 +79,17 @@ export class ArchiveService {
    */
   private formatFeedbackForArchive(feedback: Feedback): string {
     const date = new Date(feedback.date).toLocaleString('fr-FR');
-    
+    const periodsText = feedback.evgDetails.periods.join('\n');
+
     return `PRÉFÉRENCES EVG - ${feedback.username}
 Date: ${date}
 
-Prénom: ${feedback.evgDetails.firstName}
+Username: ${feedback.username}
 Budget par personne: ${feedback.evgDetails.budget}€
-Période souhaitée: ${feedback.evgDetails.period}
+Périodes souhaitées:\n${periodsText}
 Durée du séjour: ${feedback.evgDetails.duration} nuit(s)
 Destination: ${feedback.evgDetails.destination}
+Proximité: ${feedback.evgDetails.proximity}
 Style de séjour: ${feedback.evgDetails.style}
 
 Activités préférées:
