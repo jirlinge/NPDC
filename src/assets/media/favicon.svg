@@ -1,0 +1,7 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" fill="#FFFFFF"></rect>
+  <g fill="#0B0B0B" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="32" y="28" font-size="28" letter-spacing="1">NP</text>
+    <text x="32" y="54" font-size="28" letter-spacing="1">DC</text>
+  </g>
+</svg>
