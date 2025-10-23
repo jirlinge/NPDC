@@ -352,6 +352,12 @@
   gap: 16px;
 }
 
+.feedback-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .user-avatar {
   width: 48px;
   height: 48px;
@@ -508,6 +514,12 @@
   color: #1a1a1a;
   margin: 0;
   text-transform: uppercase;
+}
+
+.modal-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .btn-close {
