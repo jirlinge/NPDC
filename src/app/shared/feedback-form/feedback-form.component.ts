@@ -134,17 +134,17 @@ export class FeedbackFormComponent implements OnInit {
         }
       };
 
+      // Créer et télécharger le fichier .txt en premier
+      this.createAndDownloadTxt(feedback);
+
       // Afficher le succès
-      this.successMessage = 'Merci ! Vos préférences ont été enregistrées.';
-      
+      this.successMessage = 'Merci ! Vos préférences ont été enregistrées et le fichier a été téléchargé.';
+
       // Émettre l'événement
       this.feedbackSubmitted.emit(feedback);
-      
+
       // Log dans la console
       console.log('Feedback soumis:', feedback);
-      
-      // Créer et télécharger le fichier .txt
-      this.createAndDownloadTxt(feedback);
       
       // Réinitialiser le formulaire
       this.form.reset();
@@ -156,13 +156,15 @@ export class FeedbackFormComponent implements OnInit {
   }
 
   private createAndDownloadTxt(feedback: any): void {
-    const periodsText = feedback.evgDetails.periods.join('\n');
-    const content = `PRÉFÉRENCES EVG - ${feedback.username}
+    try {
+      const periodsText = feedback.evgDetails.periods.join('\n');
+      const content = `PRÉFÉRENCES EVG - ${feedback.username}
 Date: ${new Date().toLocaleString('fr-FR')}
 
 Username: ${feedback.username}
 Budget par personne: ${feedback.evgDetails.budget}€
-Périodes souhaitées:\n${periodsText}
+Périodes souhaitées:
+${periodsText}
 Destination: ${feedback.evgDetails.destination}
 Proximité: ${feedback.evgDetails.proximity}
 Style de séjour: ${feedback.evgDetails.style}
@@ -175,15 +177,24 @@ ${feedback.evgDetails.activitiesToAvoid || 'Aucune'}
 
 Consentement: ${feedback.evgDetails.consent ? 'Oui' : 'Non'}`;
 
-    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `preferences_evg_${feedback.username}_${new Date().toISOString().split('T')[0]}.txt`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    window.URL.revokeObjectURL(url);
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `preferences_evg_${feedback.username}_${new Date().toISOString().split('T')[0]}.txt`;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+
+      setTimeout(() => {
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      }, 100);
+
+      console.log('Téléchargement du fichier .txt déclenché');
+    } catch (error) {
+      console.error('Erreur lors du téléchargement du fichier:', error);
+    }
   }
 
   private saveToLocalStorage(): void {
