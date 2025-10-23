@@ -71,25 +71,7 @@
         </div>
       </div>
 
-      <!-- 3. Durée du séjour -->
-      <div class="form-group">
-        <label for="duration" class="form-label">
-          Durée du séjour <span class="required">*</span>
-        </label>
-        <select
-          id="duration"
-          formControlName="duration"
-          class="form-control"
-          [class.error]="f['duration'].invalid && f['duration'].touched"
-        >
-          <option value="">Sélectionnez une durée</option>
-          <option value="1">1 nuit</option>
-          <option value="2">2 nuits</option>
-          <option value="3">3 nuits</option>
-        </select>
-      </div>
-
-      <!-- 4. Destination -->
+      <!-- 3. Destination -->
       <div class="form-group">
         <label for="destination" class="form-label">
           Destination <span class="required">*</span>
@@ -104,7 +86,7 @@
         />
       </div>
 
-      <!-- 5. Proximité Paris -->
+      <!-- 4. Proximité Paris -->
       <div class="form-group">
         <label for="proximity" class="form-label">
           Proximité de Paris <span class="required">*</span>
@@ -121,7 +103,7 @@
         </select>
       </div>
 
-      <!-- 6. Style de séjour -->
+      <!-- 5. Style de séjour -->
       <div class="form-group">
         <label for="style" class="form-label">
           Style de séjour <span class="required">*</span>
@@ -142,7 +124,7 @@
         </select>
       </div>
 
-      <!-- 7. Activités préférées -->
+      <!-- 6. Activités préférées -->
       <div class="form-group">
         <label for="preferredActivities" class="form-label">
           Activités préférées
@@ -156,7 +138,7 @@
         ></textarea>
       </div>
 
-      <!-- 8. Activités à éviter -->
+      <!-- 7. Activités à éviter -->
       <div class="form-group">
         <label for="activitiesToAvoid" class="form-label">
           Activités à éviter
@@ -170,7 +152,7 @@
         ></textarea>
       </div>
 
-      <!-- 9. Consentement -->
+      <!-- 8. Consentement -->
       <div class="form-group">
         <label class="checkbox-label">
           <input

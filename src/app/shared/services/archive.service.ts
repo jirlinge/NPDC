@@ -87,7 +87,6 @@ Date: ${date}
 Username: ${feedback.username}
 Budget par personne: ${feedback.evgDetails.budget}€
 Périodes souhaitées:\n${periodsText}
-Durée du séjour: ${feedback.evgDetails.duration} nuit(s)
 Destination: ${feedback.evgDetails.destination}
 Proximité: ${feedback.evgDetails.proximity}
 Style de séjour: ${feedback.evgDetails.style}

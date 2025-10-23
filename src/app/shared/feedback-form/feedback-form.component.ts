@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 export interface FeedbackFormData {
   budget: number;
   periods: string[];
-  duration: string;
   destination: string;
   proximity: string;
   preferredActivities: string;
@@ -38,7 +37,6 @@ export class FeedbackFormComponent implements OnInit {
     this.form = this.fb.group({
       budget: [200, [Validators.required, Validators.min(50), Validators.max(500)]],
       periods: [[], [Validators.required]],
-      duration: ['', [Validators.required]],
       destination: ['', [Validators.required]],
       proximity: ['', [Validators.required]],
       preferredActivities: [''],
@@ -127,7 +125,6 @@ export class FeedbackFormComponent implements OnInit {
         evgDetails: {
           budget: formData.budget,
           periods: formData.periods,
-          duration: formData.duration,
           destination: formData.destination,
           proximity: formData.proximity,
           preferredActivities: formData.preferredActivities,
@@ -166,7 +163,6 @@ Date: ${new Date().toLocaleString('fr-FR')}
 Username: ${feedback.username}
 Budget par personne: ${feedback.evgDetails.budget}€
 Périodes souhaitées:\n${periodsText}
-Durée du séjour: ${feedback.evgDetails.duration} nuit(s)
 Destination: ${feedback.evgDetails.destination}
 Proximité: ${feedback.evgDetails.proximity}
 Style de séjour: ${feedback.evgDetails.style}

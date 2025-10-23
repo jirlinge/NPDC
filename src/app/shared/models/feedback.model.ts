@@ -1,7 +1,6 @@
 export interface EVGDetails {
   budget: number;
   periods: string[];
-  duration: string;
   destination: string;
   proximity: string;
   preferredActivities?: string;
