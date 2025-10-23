@@ -42,7 +42,9 @@ export class AuthService {
     { id: 16, username: 'elisabeth', email: 'elisabeth@npdc.com', role: 'user', firstName: 'Elisabeth', lastName: '' },
     { id: 17, username: 'olga', email: 'olga@npdc.com', role: 'user', firstName: 'Olga', lastName: '' },
     { id: 18, username: 'thu', email: 'thu@npdc.com', role: 'user', firstName: 'Thu', lastName: '' },
-    { id: 19, username: 'agathe', email: 'agathe@npdc.com', role: 'user', firstName: 'Agathe', lastName: '' }
+    { id: 19, username: 'agathe', email: 'agathe@npdc.com', role: 'user', firstName: 'Agathe', lastName: '' },
+    { id: 20, username: 'vivien', email: 'vivien@npdc.com', role: 'user', firstName: 'Vivien', lastName: '' },
+    { id: 21, username: 'camille', email: 'camille@npdc.com', role: 'user', firstName: 'Camille', lastName: '' }
   ];
 
   // Mots de passe en dur (en production, utiliser un système de hachage)
@@ -66,8 +68,8 @@ export class AuthService {
     'olga': '2w5s6ejsjxy4',
     'thu': 'REe1pbHY692Y',
     'agathe': 'FlbQ8jZhgjSB',
-    vivien:    525Rqf0YXbtK
-camille:   Nh4plOua-paj
+    'vivien': '525Rqf0YXbtK',
+    'camille': 'Nh4plOua-paj'
   };
 
   constructor() {
