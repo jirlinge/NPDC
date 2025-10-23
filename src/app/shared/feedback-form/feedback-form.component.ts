@@ -55,7 +55,7 @@ export class FeedbackFormComponent implements OnInit {
 
   private generateWeekends(): void {
     const year = 2026;
-    const months = [4, 5];
+    const months = [5, 6];
     this.availableWeekends = [];
 
     months.forEach(month => {
