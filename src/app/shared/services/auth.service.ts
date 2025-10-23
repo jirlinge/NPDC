@@ -65,7 +65,9 @@ export class AuthService {
     'elisabeth': 'gV7TToWsLOLd',
     'olga': '2w5s6ejsjxy4',
     'thu': 'REe1pbHY692Y',
-    'agathe': 'FlbQ8jZhgjSB'
+    'agathe': 'FlbQ8jZhgjSB',
+    vivien:    525Rqf0YXbtK
+camille:   Nh4plOua-paj
   };
 
   constructor() {
